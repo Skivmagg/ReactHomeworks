@@ -13,7 +13,6 @@ import {
 } from "react-router-dom";
 
 
-
 class AllUsers extends Component {
     userServices = new UserService()
     state = {users: [], allPosts: null}
@@ -25,19 +24,20 @@ class AllUsers extends Component {
     }
 
     getAllPosts = (id) => {
-this.userServices.getAllPostsById(id)
-    .then(value => this.setState({allPosts:value}))
+        this.userServices.getAllPostsById(id)
+            .then(value => this.setState({allPosts: value}))
     }
 
 
     render() {
-        let {users,allPosts} = this.state
+        let {users, allPosts} = this.state
         let {match: {url}} = this.props
         return (
             <div>
                 <div className={'allUsers'}>
 
-                    <div className={'all'}>{users.map(value => <OneUser user={value} key={value.id} getAllPosts={this.getAllPosts}/>)}</div>
+                    <div className={'all'}>{users.map(value => <OneUser user={value} key={value.id}
+                                                                        getAllPosts={this.getAllPosts}/>)}</div>
 
                     <div className={'oneUser'}><Switch>
                         <Route path={url + '/:id'} render={(props) => {
@@ -53,7 +53,8 @@ this.userServices.getAllPostsById(id)
 
 
                 <div className={'allPosts'}>All Posts</div>
-                {allPosts && <div className={'allQ'}>{allPosts.map(value=><UserPosts posts={value} key={value.id}/>)}</div>}
+                {allPosts &&
+                <div className={'allQ'}>{allPosts.map(value => <UserPosts posts={value} key={value.id}/>)}</div>}
 
             </div>
 

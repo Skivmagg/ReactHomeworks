@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import './oneUser.css'
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
     withRouter
 } from "react-router-dom";
 import FullUser from "../fullUser/FullUser";
@@ -13,7 +13,7 @@ import FullUser from "../fullUser/FullUser";
 
 class OneUser extends Component {
     render() {
-      let {user,match:{url}, getAllPosts} = this.props
+        let {user, match: {url}, getAllPosts} = this.props
 
         return (
 
@@ -21,24 +21,20 @@ class OneUser extends Component {
             <div>
                 <div className={'user'}>
 
-                    <div>{user.id} - {user.name}
-
+                    <div>
+                        {user.id} - {user.name}
                     </div>
 
                     <div>
-                        <button className={'btn1'}><Link className={'link1'} to={url + '/' + user.id}>Details</Link></button>
-                        <button className={'btn2'} onClick={()=> getAllPosts(user.id)}>Posts</button>
+                        <button className={'btn1'}><Link className={'link1'} to={url + '/' + user.id}>Details</Link>
+                        </button>
+                        <button className={'btn2'} onClick={() => getAllPosts(user.id)}>Posts</button>
                     </div>
-
-
-
 
 
                 </div>
                 <hr/>
             </div>
-
-
 
 
         );
