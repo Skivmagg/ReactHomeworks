@@ -1,0 +1,14 @@
+body {
+    background-color: darkslategray;
+
+}
+
+.header{
+    color: white;
+    font-size: 45px;
+}
+
+.main {
+    width: 800px;
+    background-color: white;
+}

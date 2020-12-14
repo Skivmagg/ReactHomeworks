@@ -1,17 +1,44 @@
 import React, {Component} from 'react';
-import AllPosts from "./components/All-Posts/All-posts";
-import AllUsers from "./components/All-Users/All-Users";
+import './App.css'
+import AllUsers from "./components/users/AllUsers";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+
+} from "react-router-dom";
 
 class App extends Component {
     render() {
         return (
-            <div>
+<Router>
+    <h1><Link to={'/users'} className={'header'}>Users</Link></h1>
+    <div className={'main'}>
+<Switch>
+    <Route path={'/users'} render={()=>{
+       return <AllUsers/>
+    }}/>
 
-                <div><AllUsers/></div>
 
-                <div><AllPosts/></div>
 
-            </div>
+</Switch>
+
+
+
+
+    </div>
+
+
+
+
+
+
+</Router>
+
+
+
+
         );
     }
 }
