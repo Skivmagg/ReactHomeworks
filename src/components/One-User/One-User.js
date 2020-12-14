@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    withRouter
+} from "react-router-dom";
 
 class OneUser extends Component {
     render() {
-        let {user, showMore,isButton,showmore} = this.props;
+        let {user, match: {url}} = this.props;
         return (
             <div>
-                {user.name} - {user.email} - {user.address.city}
-                {isButton && <button onClick={()=>showMore(user.id)}>Show More</button>}
+                {user.name} - {user.email} - {user.address.city} - <Link to={url + '/'+user.id}>Info</Link>
 
-                {showmore && user.phone}
-
-                {showmore && user.company.name}
 
             </div>
 
@@ -19,4 +22,4 @@ class OneUser extends Component {
     }
 }
 
-export default OneUser;
+export default withRouter(OneUser);

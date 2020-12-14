@@ -1,32 +1,52 @@
 import React, {Component} from 'react';
 import OneUser from "../One-User/One-User";
+import {UsersService} from "../../services/UsersService";
+import FullUser from "../FullUser/FullUser";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    withRouter
+} from "react-router-dom";
+
 
 class AllUsers extends Component {
 
-    state = {allUsers: [], chosenUser:null};
+    userService = new UsersService()
+
+    state = {allUsers: []};
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(value => value.json())
-            .then(allUsers => {
-                this.setState({allUsers})
-            })
+
+        this.userService.getAllUsers()
+            .then(value => this.setState({allUsers: value}))
+
     }
 
-    showMore = (id) => this.setState({chosenUser: this.state.allUsers.find(value => value.id === id)})
 
-render()
-{
-    let {allUsers, chosenUser} = this.state;
-    return (
-        <div>
-            <h1>All Users</h1>
-            {allUsers.map(value => <OneUser user={value} key={value.id} showMore={this.showMore} isButton={true} showmore={false}/>)}
-            <hr/>
-            {chosenUser && <OneUser user={chosenUser} isButton={false} showmore={true} />}
-        </div>
-    );
-}
+    render() {
+        let {allUsers} = this.state;
+        let {match:{url}} = this.props;
+
+        return (
+            <div>
+                <h1>All Users</h1>
+                {allUsers.map(value => <OneUser user={value} key={value.id}/>)}
+                <hr/>
+                <Switch>
+                    <Route path={url + '/:id'} render={(props)=>{
+                        let {match:{params:{id}}} = props;
+                     return <FullUser id={id} key={id}/>
+                    }}/>
+
+                </Switch>
+
+                <hr/>
+            </div>
+
+        );
+    }
 }
 
-export default AllUsers;
+export default withRouter(AllUsers);

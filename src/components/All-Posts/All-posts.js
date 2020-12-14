@@ -1,35 +1,49 @@
 import React, {Component} from 'react';
 import OnePost from "../One-Post/One-post";
-
+import {PostsService} from "../../services/PostsService";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+    withRouter
+} from "react-router-dom";
+import FullPost from "../FullPost/FullPost";
 class AllPosts extends Component {
-
-    state = {allPosts:[], comment: null}
+postService = new PostsService()
+    state = {allPosts:[]}
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(value => value.json())
-            .then(allPosts => {
-                this.setState({allPosts})
-    })
+
+    this.postService.getAllPosts()
+        .then(value => this.setState({allPosts:value}))
+
     }
 
-    showComment = (id) => {
-      let comment = this.state.allPosts.find(value => value.id === id);
-      this.setState({comment})
-    }
 
 
     render() {
-        let {allPosts,comment} = this.state;
+        let {allPosts} = this.state;
+        let {match:{url}} = this.props;
         return (
             <div>
                 <h1>All Posts</h1>
-                {allPosts.map(value => <OnePost post={value} key={value.id} showComment={this.showComment} showBody={false} isButton={true}/>)}
+                {allPosts.map(value => <OnePost post={value} key={value.id} />)}
+<hr/>
+                <Switch>
+                    <Route path={url + '/:id'} render={(props)=>{
+                        let {match:{params:{id}}} = props;
+                       return <FullPost id={id} key={id}/>
 
-                {comment && <OnePost post={comment} showBody={true} isButton={false}/>}
+                    }}/>
+
+
+
+                </Switch>
+<hr/>
             </div>
         )
     }
 }
 
-export default AllPosts;
+export default withRouter(AllPosts) ;

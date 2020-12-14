@@ -1,17 +1,24 @@
 import React, {Component} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+    withRouter
+} from "react-router-dom";
 
 class OnePost extends Component {
     render() {
-        let {post, showComment,showBody,isButton} = this.props;
+        let {post, match:{url}} = this.props;
         return (
             <div>
-                {post.id} - {post.title} - {isButton && <button onClick={()=>showComment(post.id)}>Show comment</button>}
+                {post.id} - {post.title} - <Link to={url+'/'+ post.id}>Info</Link>
 <br/>
-                {showBody && post.body }
+
 
             </div>
         );
     }
 }
 
-export default OnePost;
+export default withRouter(OnePost);
