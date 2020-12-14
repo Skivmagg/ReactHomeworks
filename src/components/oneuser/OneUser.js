@@ -8,14 +8,15 @@ import {
   Link,
     withRouter
 } from "react-router-dom";
+import FullUser from "../fullUser/FullUser";
 
 
 class OneUser extends Component {
     render() {
-      let {user,match:{url}} = this.props
+      let {user,match:{url}, getAllPosts} = this.props
 
         return (
-            <Router>
+
 
             <div>
                 <div className={'user'}>
@@ -25,8 +26,8 @@ class OneUser extends Component {
                     </div>
 
                     <div>
-                        <button><Link to={url + '/' + user.id}>Details</Link></button>
-                        <button>Posts</button>
+                        <button className={'btn1'}><Link className={'link1'} to={url + '/' + user.id}>Details</Link></button>
+                        <button className={'btn2'} onClick={()=> getAllPosts(user.id)}>Posts</button>
                     </div>
 
 
@@ -39,7 +40,7 @@ class OneUser extends Component {
 
 
 
-            </Router>
+
         );
     }
 }

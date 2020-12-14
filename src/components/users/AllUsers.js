@@ -3,11 +3,12 @@ import UserService from "../../services/user-service";
 import OneUser from "../oneuser/OneUser";
 import './allUsers.css'
 import FullUser from "../fullUser/FullUser";
+import UserPosts from "../posts/UserPosts";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
     withRouter
 } from "react-router-dom";
 
@@ -15,43 +16,51 @@ import {
 
 class AllUsers extends Component {
     userServices = new UserService()
-    state = {users:[]}
+    state = {users: [], allPosts: null}
 
 
     componentDidMount() {
-      this.userServices.getAllUsers()
-            .then(value => this.setState({users:value}))
+        this.userServices.getAllUsers()
+            .then(value => this.setState({users: value}))
+    }
+
+    getAllPosts = (id) => {
+this.userServices.getAllPostsById(id)
+    .then(value => this.setState({allPosts:value}))
     }
 
 
     render() {
-       let {users} = this.state
-        let {match:{url}} = this.props
-       return (
+        let {users,allPosts} = this.state
+        let {match: {url}} = this.props
+        return (
+            <div>
+                <div className={'allUsers'}>
 
-    <div className={'allUsers'}>
+                    <div className={'all'}>{users.map(value => <OneUser user={value} key={value.id} getAllPosts={this.getAllPosts}/>)}</div>
 
-        {users.map(value => <OneUser user={value} key={value.id}/>)}
+                    <div className={'oneUser'}><Switch>
+                        <Route path={url + '/:id'} render={(props) => {
 
-        <Switch>
-            <Route path={url + '/:id'} render={(props)=>{
-console.log(props)
-                let {match:{params:{id}}} = props;
-                console.log(id);
-                return <FullUser id={id} key={id}/>
+                            let {match: {params: {id}}} = props;
 
-            }}/>
+                            return <FullUser id={id} key={id}/>
 
-        </Switch>
-    </div>
+                        }}/>
 
-
+                    </Switch></div>
+                </div>
 
 
+                <div className={'allPosts'}>All Posts</div>
+                {allPosts && <div className={'allQ'}>{allPosts.map(value=><UserPosts posts={value} key={value.id}/>)}</div>}
+
+            </div>
 
 
         );
     }
+
 }
 
 export default withRouter(AllUsers) ;

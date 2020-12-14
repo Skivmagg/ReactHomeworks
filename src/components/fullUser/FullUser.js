@@ -14,16 +14,16 @@ class FullUser extends Component {
     }
 
     render() {
-        let {user}=this.state
+        let {user} = this.state
         return (
-       <div>
-
-           {user && <div>{user.name} - {user.id}</div>}
-
-
-       </div>
-
-
+            <div>
+                {user && <div>
+                    <h5>{user.name} <br/>{user.username}</h5>
+                    <h6>Phone - {user.phone}</h6>
+                    <h6>Email - {user.email}</h6>
+                    <h6>Website - {user.website}</h6>
+                </div>}
+            </div>
         );
     }
 }

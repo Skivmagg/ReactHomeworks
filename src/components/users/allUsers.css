@@ -1,4 +1,41 @@
 .allUsers{
     font-size: 25px;
+    display: flex;
+    margin-left: 30px;
 
+
+}
+
+.oneUser{
+    padding-left: 25px;
+    background-color: white;
+    width: 800px;
+    height: 300px;
+    margin-left: 30px;
+    border: 1px white solid;
+    border-radius: 8px;
+
+}
+.all{
+    background-color: white;
+    width: 900px;
+    border: 1px white solid;
+    border-radius: 8px;
+}
+
+.allPosts{
+    font-size: 40px;
+    color: white;
+    text-align: center;
+}
+
+.allQ{
+    background-color: white;
+    width: 810px;
+    border: 1px white solid;
+    border-radius: 8px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }

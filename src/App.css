@@ -1,6 +1,6 @@
 body {
     background-color: darkslategray;
-
+margin-left: 10px;
 }
 
 .header{
@@ -9,6 +9,7 @@ body {
 }
 
 .main {
-    width: 800px;
-    background-color: white;
+    width: 100%;
+
+
 }
