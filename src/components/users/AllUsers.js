@@ -17,6 +17,7 @@ class AllUsers extends Component {
     userServices = new UserService()
     state = {users:[]}
 
+
     componentDidMount() {
       this.userServices.getAllUsers()
             .then(value => this.setState({users:value}))
@@ -34,8 +35,11 @@ class AllUsers extends Component {
 
         <Switch>
             <Route path={url + '/:id'} render={(props)=>{
+console.log(props)
                 let {match:{params:{id}}} = props;
+                console.log(id);
                 return <FullUser id={id} key={id}/>
+
             }}/>
 
         </Switch>

@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import UserService from "../../services/user-service";
 
 class FullUser extends Component {
-
-    userServices = new UserService()
     state = {user: null}
+    userServices = new UserService()
+
 
     componentDidMount() {
         let {id} = this.props

@@ -5,12 +5,15 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+    withRouter
 } from "react-router-dom";
+
 
 class OneUser extends Component {
     render() {
-      let {user} = this.props
+      let {user,match:{url}} = this.props
+
         return (
             <Router>
 
@@ -22,9 +25,13 @@ class OneUser extends Component {
                     </div>
 
                     <div>
-                        <button><Link to={`/users/${user.id}`}>Details</Link></button>
+                        <button><Link to={url + '/' + user.id}>Details</Link></button>
                         <button>Posts</button>
                     </div>
+
+
+
+
 
                 </div>
                 <hr/>
@@ -37,4 +44,4 @@ class OneUser extends Component {
     }
 }
 
-export default OneUser;
+export default withRouter(OneUser);
