@@ -8,7 +8,7 @@ import {
     Link,
     withRouter
 } from "react-router-dom";
-import FullUser from "../fullUser/FullUser";
+
 
 
 class OneUser extends Component {
